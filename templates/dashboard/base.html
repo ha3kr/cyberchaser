@@ -1,0 +1,215 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>CyberChaser | Bug Bounty Recon Framework</title>
+    <link rel="shortcut icon" href="{% static 'dashboard/images/cc_logo.ico' %}" type="image/x-icon">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/index.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/style.css' %}">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+    <script src="{% static 'dashboard/assets/index.js' %}"></script>
+    <script src="{% static 'dashboard/assets/notification.js' %}"></script>
+
+    </head>
+
+
+    <body>
+        
+    <div class="page">
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-container">
+                    <div class="logo-container">
+                        <!--
+                            Enable Once You Have Logo
+                        <img class="logo-sidebar" src="https://via.placeholder.com/400" />
+                        -->
+                        <h1>C<sub>C</sub></h1>
+                    </div>
+                    <div class="brand-name-container">
+                        <p class="brand-name">
+                            CyberChaser<br />
+                            <span class="brand-subname">
+                            By SC
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-body">
+                <ul class="navigation-list">
+                    <li class="navigation-list-item" id='dashboard'>
+                        <a class="navigation-link" href="{% url 'dashboard:index' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <div class="col-9">
+                                    Dashboard
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    {% comment %} Domains Functionality {% endcomment %}
+                    <li class="navigation-list-item" id='domains'>
+                        <a class="navigation-link" href="{% url 'dashboard:domains' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-align-left"></i>
+                                </div>
+                                <div class="col-9">
+                                    Domains
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="navigation-list-item" id='scope'>
+                        <a class="navigation-link" href="{% url 'dashboard:scope' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-crosshairs"></i>
+                                </div>
+                                <div class="col-9">
+                                    Scope
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="navigation-list-item" id='gitdorks'>
+                        <a class="navigation-link" href="{% url 'dashboard:gitdorks' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="col-9">
+                                    Github Dorks
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navigation-list-item" id='ggdorks'>
+                        <a class="navigation-link" href="{% url 'dashboard:ggdorks' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="col-9">
+                                    Google Dorks
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navigation-list-item" id='acq'>
+                        <a class="navigation-link" href="{% url 'dashboard:acquisitions' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-location-arrow"></i>
+                                </div>
+                                <div class="col-9">
+                                    Acquisitions
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <hr style="color:#fff;margin-top:30px;">
+
+                    <li class="navigation-list-item" id='notes'>
+                        <a class="navigation-link" href="{% url 'dashboard:myNotes' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-sticky-note"></i>
+                                </div>
+                                <div class="col-9">
+                                    My Notes
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navigation-list-item" id='mtd'>
+                        <a class="navigation-link" href="{% url 'dashboard:methodology' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <div class="col-9">
+                                    Methodology
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="navigation-list-item" id="profile">
+                        <a class="navigation-link" href="{% url 'dashboard:profile' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-cog"></i>
+                                </div>
+                                <div class="col-9">
+                                    Profile
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+        
+                </ul>
+        
+                <ul class="navigation-list" style="position: absolute; bottom: 0; width: 100%;">
+
+                    <li class="navigation-list-item active">
+                        <a class="navigation-link" href="{% url 'dashboard:logout' %}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </div>
+                                <div class="col-9">
+                                    Logout
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+            </div>
+        </div>
+{% block body %}
+{% endblock body %}    
+    </div>
+<script src="{% static 'dashboard/assets/app.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+</script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,107 @@
+{% extends 'dashboard/base.html' %}
+{% block body %}
+{% if success %}
+<script>
+    tata.success('Good Job !', "{{success}}");
+</script>
+{% endif %}
+<div class="content">
+    <div class="navigationBar">
+        <button id="sidebarToggle" class="btn sidebarToggle">
+        <i class="fa fa-arrow-left togglebtn"></i>
+    </div>
+    <div class="container-fluid home__dashboard">
+        <div class="container-fluid intro__home">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-muted text-center text-uppercase">
+                        All google Dorks
+                        {% if domain %}
+                            {{domain}}
+                        {% endif %}
+                    </h3>
+                </div>
+                <!-- <div class="col-md-4">
+                    <form action="#" class="form-group d-flex justify-content-end ">
+                        <input type="text" placeholder="Enter a Domain" class="form-control target__home" style="margin-right: 1rem">
+                        <input type="submit" value="Generate" class="btn btn-primary">
+                    </form>
+                </div> -->
+            </div>
+        </div>
+        <!-- Table Content Subdomains -->
+        <div class="container">
+            <div class="card home__tables">
+                <div class="card-header table__header__custom">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <form action="#" method="POST" class="form-group">
+                                {% csrf_token %}
+                                <input type="text" placeholder='Enter Domain ..' class="form-control modal__custom__input" name="domain">
+                            </form>
+                            <span>
+                                <form action="#" method="POST" class="form-group">
+                                    {% csrf_token %}
+                                    <button type="button" class="btn custom_header_btn text-white" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Dork</button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header modal__custom__header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Add Google Dork</h5>
+                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body modal__custom__body">
+                                                    <label for="dorkName" class='mb-3'>Dork Name :</label>
+                                                    <input type="text" class="form-control modal__custom__input" placeholder='Add Dork Name ..' name="dork_name">
+                                                    <label for="dorkName" class=' mt-3 mb-3'>Dork Description :</label>
+                                                    <input type="text" class="form-control modal__custom__input" placeholder="Describe The Dork" name="dork_desc">
+                                                </div>
+                                                <div class="modal-footer modal__custom__footer">
+                                                    <button type="button" class="btn custom__btn__close" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" name="submit" class="btn custom__btn">Add Dork</button>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </span>   
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body card__body_custom">
+                    <table class="table text-center">
+                        <tr>
+                            <th>#</th>
+                            <th>Dork Name</th>
+                            <th>Dork Link</th>
+                            <th>Dork Category</th>
+                        </tr>
+                        {% if all_dorks %}
+                            {% for dork in all_dorks %}
+                        <tr>
+                            <td>
+                                {{dork.id}}
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-link text-decoration-none text-white">
+                                    {{dork.dork_name}}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://www.google.com/search?q=site:{{domain}}+{{dork.dork_name}}" class="btn btn-link text-decoration-none text-white" target="_blank">
+                                    https://www.google.com/search?q=site:{{domain}}+{{dork.dork_name}}
+                                </a>
+                            </td>
+                            <td>
+                                {{dork.dork_desc}}
+                            </td>
+                        </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

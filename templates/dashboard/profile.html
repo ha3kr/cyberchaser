@@ -1,0 +1,51 @@
+{% extends 'dashboard/base.html' %}
+{% block body %}
+
+{% if messages %}
+{% for message in messages %}
+    <script>
+        tata.success("Good Job !", "{{message}}");
+    </script>
+{% endfor %}
+{% endif %}
+        <div class="content">
+            <div class="navigationBar">
+                <button id="sidebarToggle" class="btn sidebarToggle">
+                <i class="fa fa-arrow-left togglebtn"></i>
+            </div>
+            <div class="container-fluid home__dashboard">
+                <div class="container">
+                    <div class="card col-md-6 m-auto mt-5 home__tables home__tables__without__title">
+                        <div class="card-header table__header__custom">
+                            <div class="container-fluid">
+                                <div class="d-flex align-items-center">
+                                    <h5 class='profile__title'><i class="fas fa-cog"></i> Edit Profile</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body card__body_custom pt-5">
+                            <div class="form-group">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="formGroupExampleInput" class="form-label profile__label">New Username :</label>
+                                        <input type="text" name="username" class="form-control profile__fields" id="formGroupExampleInput" placeholder="Typing New Username ..">
+                                      </div>
+                                      <div class="mb-3">
+                                        <label for="formGroupExampleInput2" class="form-label profile__label">New Password :</label>
+                                        <input type="password"  name="password" class="form-control profile__fields" id="formGroupExampleInput2" placeholder="Typing New Password ..">
+                                      </div>
+                                      <div class="mb-3 mt-4">
+                                          <button class="btn custom__btn">
+                                                <i class="fas fa-edit"></i>
+                                                Update
+                                            </button>
+                                      </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock body %}

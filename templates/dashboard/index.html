@@ -1,0 +1,312 @@
+{% extends 'dashboard/base.html' %}
+
+{% block body %}   
+{% if delete_notification %}
+<script>
+    tata.success("Good Job !", "{{delete_notification}}");
+</script>
+{% endif %} 
+
+{% if message %}
+<script>
+    tata.success("Good Job !", "{{message}}");
+</script>
+{% endif %}  
+<div class="content">
+<div class="navigationBar">
+    <button id="sidebarToggle" class="btn sidebarToggle">
+    <i class="fa fa-arrow-left togglebtn"></i>
+</div>
+<div class="container-fluid home__dashboard">
+    <div class="container-fluid intro__home">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>Welcome To Cyber<span class='second__intro'>Chaser</span>
+                </h1>
+            </div>
+            <div class="col-md-5">
+                <form action="" method="post" class="form-group d-flex justify-content-end align-items-center">
+                    {% csrf_token %}
+                    <select class="form-select old__target_select custom__target_select" aria-label="Default select example" onchange="this.form.submit()" name='old_program' id='old_program_Select'>
+                        <option default>All Programs</option>
+                        {% if programs %}
+                            {% for program in programs %}
+                                <option value="{{program.id}}">{{program.ProgramName}}</option>
+                            {% endfor %}
+                        {% endif %}
+                        </select>                                
+                        <span class="text__divider">or</span>
+
+
+                    <!-- New Feature Added -->
+                    <button type="button" class="btn custom__btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa fa-paper-plane"></i>
+                        New Scan
+                    </button>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header modal__custom__header">
+                                <h5 class="modal-title" id="exampleModalLabel">New Target</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body modal__custom__body">
+                                <form action="#" method="post">
+                                <div class="mb-3">
+                                    <label for="domain" class="col-form-label">Domain :</label>
+                                    <input type="text" name="domain" class="form-control modal__custom__input" placeholder="Enter A Domain ex: target.com" id="domain">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Enumeration Types :</label>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="scan_types" value='domains'>
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Domains</label>
+                                </div>
+
+                                    {% comment %} <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="scan_types" value="port_scan">
+                                        <label class="form-check-label" for="flexSwitchCheckDefault">Port Scanning</label>
+                                    </div> {% endcomment %}
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="scan_types" value="acq">
+                                        <label class="form-check-label" for="flexSwitchCheckDefault">Acquisitions</label>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" value="save" name='save__check'>
+                                    <label class="form-check-label" for="save__option">
+                                        Save
+                                        <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Save Scan To Database."></i>
+                                    </label>
+                                    </div>
+                            </div>
+                            <div class="modal-footer modal__custom__footer">
+                                <button type="button" class="btn custom__btn__close" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" name="btnsubmit" class="btn custom__btn">
+                                    <i class='fa fa-paper-plane'></i>
+                                    Start
+                                </button>
+                            </div>
+                </form>
+            </div>
+            </div>
+        </div>
+</div>
+        </div>
+    </div>
+    <!-- Start satisfaction -->
+    <div class="row d-flex justify-content-between satisfaction">
+        <!-- New UI -->
+        <div class="col-lg-6 col-12 row">
+            <div class="col-6 col-md-6">
+                <div class="card shadow p-3 mb-5 rounded satisfaction__box d-flex">
+                    <div class="card-header">
+                        <i class="fas fa-align-left"></i>
+                    </div>
+                    <a class="card-body" href="{% url 'dashboard:domains' %}">
+                        <span class="satisfaction__title">Domains</span>
+                        <span class='satisfaction__count'>
+                        {% if domains %}
+                            {{domains | length}}
+                        {% else %}
+                            0
+                        {% endif %}
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-6 col-md-6">
+                <div class="card shadow p-3 mb-5 rounded satisfaction__box">
+                    <div class="card-header">
+                        <i class="fas fa-location-arrow"></i>
+                    </div>
+                    <a class="card-body" href="{% url 'dashboard:acquisitions' %}">
+                        <span class="satisfaction__title">Acquisitions</span>
+                        <span class='satisfaction__count'>
+                        {% if acq %}
+                            {{acq | length}}
+                        {% else %}
+                            0
+                        {% endif %}
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-6 col-md-6">
+                <div class="card shadow p-3 mb-5 rounded satisfaction__box">
+                    <div class="card-header">
+                        <i class="fas fa-search"></i>
+                    </div>                           
+                    <a class="card-body" href="{% url 'dashboard:ggdorks' %}">
+                        <span class="satisfaction__title">Google Dorks</span>
+                        <span class='satisfaction__count'>
+                        {% if ggdorks %}
+                            {{ggdorks | length}}
+                        {% else %}
+                            0
+                        {% endif %}
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-6 col-md-6">
+                <div class="card shadow p-3 mb-5 rounded satisfaction__box">
+                    <div class="card-header">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <a class="card-body" href="{% url 'dashboard:gitdorks' %}">
+                        <span class="satisfaction__title">Github Dorks</span>
+                        <span class='satisfaction__count'>
+                        {% if gitdorks %}
+                            {{gitdorks | length}}
+                        {% else %}
+                            0
+                        {% endif %}
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-12 all__programs">
+            <div class="card home__tables rounded">
+                <div class="card-header table__header__custom">
+                    <i class="fas fa-list-ul"></i>
+                    All Programs
+                </div>
+                <div class="card-body card__body_custom">
+                    {% if programs %}
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <th class="align-middle">ID</th>
+                            <th class="align-middle">Program Name</th>
+                            <th class="align-middle">Started At</th>
+                            <th class="align-middle">Action</th>
+                        </tr>
+                        {% for prg in programs %}
+                        <tr>
+                            <td class="align-middle">{{prg.id}}</td>
+                            <td class="align-middle">{{prg.ProgramName}}</td>
+                            <td class="align-middle">{{prg.start_date}}</td>
+                            <td class="align-middle">
+                                <a href="?delete={{prg.id}}" class="btn btn__delete btn-sm">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    {% else %}
+                    <p class="text__tuto text-center pt-5">
+                        Press New Scan Button <i class="fa fa-arrow-circle-right"></i> Enter Target <i class="fa fa-arrow-circle-right"></i> Select Type Scan <i class="fa fa-arrow-circle-right"></i> Save.
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Table -->
+    <div class="row">
+        <div class="col-md-12"> <!-- Old Column 9 -->
+            <div class="card all__targets home__tables rounded">
+                <div class="card-header table__header__custom">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span>
+                            <i class="fas fa-database"></i>
+                            Port Scanning
+                        </span>
+                        <form action="" method='GET' class="form-group">
+                            {% csrf_token %}
+                            <input type="text" name="port_scan" placeholder='Enter IP Address ..' class='form-control modal__custom__input rounded'>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body text-center card__body_custom" style="padding: 2rem">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table__targets">
+                                    <tr>
+                                        <th>IP Address</th>
+                                        <th>Open Ports</th>
+                                        <th>HostNames</th>
+                                    </tr>
+                                    {% if ip_scan %}
+                                    <tr>
+                                        <td>
+                                            {{ip_scan.ip}}
+                                        </td>
+                                        <td>
+                                            {% for port in ip_scan.ports %}
+                                                {{port}} <br>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for hostname in ip_scan.hostnames %}
+                                                {{hostname}} <br>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td>
+                                            None
+                                        </td>
+                                        <td>
+                                            None
+                                        </td>
+                                        <td>
+                                            None
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                </table>
+                                {% comment %} <p class="text__tuto">
+                                    <i class="fa fa-arrow-circle-right"></i> Enter IP Address To Scan.
+                                </p> {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% comment %} <div class="col-md-6">
+            <div class="card home__tables rounded">
+                <div class="card-header table__header__custom">
+                    <i class="fas fa-list-ul"></i>
+                    All Programs
+                </div>
+                <div class="card-body card__body_custom">
+                    {% if programs %}
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <th>ID</th>
+                            <th>Program Name</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for prg in programs %}
+                        <tr>
+                            <td>{{prg.id}}</td>
+                            <td>{{prg.ProgramName}}</td>
+                            <td>
+                                <a href="?delete={{prg.id}}" class="btn btn__delete btn-sm">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    {% else %}
+                    <h6 class='text-white text-center'>No Programs Yet <i class='far fa-sad-tear'></i></h6>
+                    {% endif %}
+                </div>
+            </div>
+        </div> {% endcomment %}
+    </div>
+</div>
+</div>
+{% endblock body %}

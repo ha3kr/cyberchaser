@@ -1,0 +1,618 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+:root {
+    --bg-color-body: #232333;
+    --bg-color-sidebar: #2B2C40;
+    --bg-color-boxes: #2B2C40;
+    --bg-color-button: #696CFF;
+    --bg-color-table-header: #2B2C40;
+    --color-welcome-title: #9999AF;
+    --color-boxes-title: #9999AF;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--bg-color-body);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-color-button);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bg-color-body);
+    cursor: pointer;
+}
+
+body {
+    background-color: var(--bg-color-body);
+    font-family: 'Open Sans', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    animation: smooth_loading .5s linear 1;
+}
+
+.page .sidebar {
+    /* background: #141526; */
+    background-color: var(--bg-color-sidebar);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: all 1s ease;
+}
+
+
+.page .content {
+    margin-left: 250px;
+    transition: all 1s ease;
+    position: relative;
+
+}
+
+/* has been edited */
+.navigationBar {
+    /* white */
+    background-color: var(--bg-color-body);
+    /* 50px */
+    display: flex;
+    align-items: center;
+    /* box-shadow: 0 4px 2px -2px #c5c6c7; */
+}
+
+.hr__custom {
+    color: var(--bg-color-body);
+    height: 1rem !important;
+    margin-top: 30px;
+}
+
+.sidebarToggle {
+    font-size: 16px;
+    color: #fff;
+    margin-left: -20px;
+    z-index: 999;
+    border-radius: 50px;
+    position: fixed;
+    background-color: var(--bg-color-button);
+    transition: all 1s ease;
+    outline: none !important;
+    box-shadow: none !important;
+    position: fixed;
+    top: 26px;
+}
+
+.togglearrow {
+    transition: 1s all linear;
+    transform: rotate(180deg);
+}
+
+.sidebarToggle.active {
+    margin-left: 10px;
+}
+
+.sidebarToggle:hover {
+    color: #fff;
+}
+
+.sidebarToggle .togglebtn {
+    transition: .5s all linear;
+}
+
+body.active .page .sidebar {
+    left: -250px;
+}
+
+body.active .page .content {
+    margin-left: 0;
+    width: 100%;
+}
+
+.sidebar-header {
+    padding: 10px 25px 10px 15px;
+}
+
+.sidebar-logo-container {
+    background-color: var(--bg-color-body);
+    border-radius: 8px;
+    padding-left: 3px;
+    display: flex;
+}
+
+.logo-container {
+    /* max-width: 40px; */
+    background-color: var(--bg-color-button);
+    color: white;
+    font-family: 'Monoton', cursive;
+    border-radius: 5px;
+    margin: 8px;
+    padding: 0 3px;
+}
+
+.logo-container h1 {
+    font-size: 2rem;
+}
+
+.logo-container img {
+    width: 100%;
+}
+
+.brand-name-container {
+    margin: 10px 55px 0px 2px;
+    padding: 0px;
+}
+
+
+/* Disabled For Now, Once You Have Logo */
+/* .logo-sidebar {
+    width: 100%;
+    height: auto;
+} */
+
+.brand-name {
+    color: var(--color-welcome-title);
+    margin: 0px;
+    padding: .5rem;
+    line-height: 1.1rem;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.brand-subname {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.navigation-list {
+    list-style-type: none;
+    padding: 0px 18px;
+    margin-top: 30px;
+}
+
+.navigation-list-item {
+    padding: 12px 18px 12px 25px;
+    margin: 15px 0px;
+    border-radius: 8px;
+
+}
+
+.navigation-list-item:hover {
+    background: var(--bg-color-button);
+    box-shadow: 0 0 0.4em rgb(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.navigation-list-item.active {
+    background: var(--bg-color-button);
+    box-shadow: 0 0 0.4em rgb(255, 255, 255, 0.1);
+}
+
+.navigation-link {
+    color: var(--color-welcome-title);
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.navigation-link i {
+    font-size: 18px;
+    color: var(--color-welcome-title);
+}
+
+.navigation-list-item:hover .navigation-link {
+    color: #fff;
+}
+
+.navigation-list-item:hover .navigation-link i {
+    color: white;
+}
+
+.navigation-list-item.active .navigation-link {
+    color: #fff;
+    font-weight: 500;
+}
+
+.navigation-list-item.active .navigation-link i {
+    color: #fff;
+}
+
+/* ==== dashboard ==== */
+
+.home__dashboard {
+    padding: 1rem 3rem;
+}
+
+.home__dashboard .intro__home {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.home__dashboard .intro__home h1,
+.text__tuto {
+    color: var(--color-welcome-title);
+}
+
+.text__tuto {
+    height: 100%;
+}
+
+.home__dashboard .intro__home .second__intro {
+    color: var(--bg-color-button);
+}
+
+.home__dashboard .form-group {
+    height: 100%;
+}
+
+.home__dashboard .form-group .old__target_select {
+    width: 30%;
+}
+
+.home__dashboard .form-group .text__divider {
+    display: flex;
+    padding: 0 2rem;
+    width: 25%;
+    align-items: center;
+    text-align: center;
+    color: var(--color-boxes-title);
+}
+
+
+.home__dashboard .form-group .text__divider::after,
+.home__dashboard .form-group .text__divider::before {
+    content: "";
+    border: .5px solid var(--color-boxes-title);
+    flex: 1;
+}
+
+
+.home__dashboard .form-group .text__divider:not(:empty)::before {
+    margin-right: 0.50em;
+}
+
+.home__dashboard .form-group .text__divider:not(:empty)::after {
+    margin-left: 0.50em;
+}
+
+.custom__btn {
+    /* background-color: #141526; */
+    background-color: var(--bg-color-button);
+    color: white;
+    cursor: pointer;
+}
+
+.custom_header_btn {
+    background: var(--bg-color-body);
+}
+
+.custom__btn__close {
+    background: var(--bg-color-sidebar);
+    color: var(--color-welcome-title);
+}
+
+.custom__btn:hover {
+    color: white;
+}
+
+.custom__target_select {
+    background-color: var(--bg-color-sidebar);
+    border: solid var(--bg-color-button);
+    color: var(--color-welcome-title);
+}
+
+/* ==== modal config ==== */
+.modal__custom__header {
+    background-color: var(--bg-color-body);
+    color: var(--color-welcome-title);
+    border: none;
+}
+
+.modal__custom__body {
+    background: var(--bg-color-sidebar);
+    color: white;
+}
+
+.modal__custom__footer {
+    background-color: var(--bg-color-body);
+    border-top: none;
+}
+
+.modal__custom__input {
+    background-color: var(--bg-color-body) !important;
+    border: solid var(--bg-color-button);
+    color: white !important;
+}
+
+.modal__custom__select {
+    background-color: var(--bg-color-body) !important;
+    border: solid var(--bg-color-button);
+    color: var(--color-welcome-title) !important;
+}
+
+.custom__input {
+    background-color: var(--bg-color-body) !important;
+    border: solid var(--bg-color-sidebar);
+    color: white !important;
+}
+
+/* === end modal config ==== */
+
+.home__dashboard .satisfaction {
+    margin: 2rem 0;
+}
+
+.home__dashboard .satisfaction .satisfaction__box {
+    /* background: #141526; */
+    background-color: var(--bg-color-boxes);
+    color: #fff;
+    transition: .3s all linear;
+    border: none;
+    border-left: solid .5rem #696CFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.home__dashboard .satisfaction .satisfaction__box:hover {
+    transform: scale(1.1);
+    border-left: solid .5rem #fff;
+}
+
+.home__dashboard .satisfaction .satisfaction__box .card-header {
+    color: var(--color-boxes-title);
+    /* border-bottom: dashed var(--color-boxes-title); */
+    border: none;
+    /* border-width: 50%; */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+.home__dashboard .satisfaction .satisfaction__box .card-header .fas {
+    padding-right: .5rem;
+    font-size: 3rem;
+    color: var(--color-welcome-title);
+}
+
+.home__dashboard .satisfaction .satisfaction__box:hover .fas {
+    color: white;
+}
+
+.home__dashboard .satisfaction .satisfaction__box .card-body {
+    font-size: 1rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.home__dashboard .satisfaction .satisfaction__box .card-body .satisfaction__title {
+    color: var(--color-welcome-title);
+    text-transform: uppercase;
+    transition: .5s all linear;
+    font-size: .8rem;
+    font-weight: bold;
+}
+
+.home__dashboard .satisfaction .satisfaction__box:hover .satisfaction__title {
+    color:white;
+}
+
+.home__dashboard .satisfaction .satisfaction__box .card-body .satisfaction__count {
+    font-size: 2rem;
+    color: var(--color-welcome-title);
+    transition: .5s all linear;
+}
+
+.home__dashboard .satisfaction .satisfaction__box:hover .satisfaction__count {color:white}
+
+.home__dashboard .all__targets .card-body .table__targets {
+    color: #000;
+}
+
+.table__header__custom {
+    font-weight: bold;
+    color: white;
+    background-color: var(--bg-color-button);
+}
+
+.card__body_custom {
+    background: var(--bg-color-sidebar);
+}
+
+.home__dashboard .all__targets .card-body .table__targets {
+    color: white;
+}
+
+.home__dashboard .all__programs {
+    height: 19.5rem !important;
+    overflow: hidden;
+}
+
+.home__dashboard .all__programs .card-body {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.home__dashboard .all__programs .card {
+    height: 100%;
+}
+
+.home__dashboard .all__targets .card-body .table__targets th,
+.home__dashboard .home__tables th {
+    font-weight: bold;
+    background-color: var(--bg-color-body);
+    color: var(--color-welcome-title);
+    text-transform: uppercase;
+}
+
+.home__dashboard .all__targets .card-body .table__targets td {
+    font-weight: lighter;
+}
+
+.home__dashboard .home__tables {
+    border: none;
+    animation: smooth_loading .5s linear 1;
+}
+
+.home__dashboard .home__tables__without__title {
+    margin-top: 4rem;
+}
+
+.home__dashboard .home__tables table {
+    color: white;
+    border: solid var(--bg-color-body);
+}
+
+.btn__delete {
+    background-color: var(--bg-color-button);
+    color: white;
+}
+
+.methodology_intro, .profile__title {
+    color: var(--bg-color-body);
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.methodology_content h1,
+.methodology_content h2,
+.methodology_content h3,
+.methodology_content h4,
+.methodology_content h5,
+.methodology_content h6 {
+    color: var(--color-welcome-title);
+    background: var(--bg-color-body);
+    padding: 10px;
+}
+
+.methodology__box {
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+    border: solid var(--bg-color-body);
+}
+
+.title__methodology {
+    color: var(--color-welcome-title);
+    background: var(--bg-color-body);
+    padding: 10px;
+}
+
+.methodology__check {
+    padding: 0 3rem;
+}
+
+.ck-editor {
+    background-color: var(--bg-color-body);
+}
+
+.ck-editor__editable_inline {
+    min-height: 400px;
+}
+
+.note__card {
+    border: none;
+    border: solid .5rem var(--bg-color-sidebar);
+    background-color: var(--bg-color-body);
+    padding: 0;
+}
+
+.note__card__header,
+.note__card__body {
+    border: none;
+    padding-top: 1rem;
+}
+
+.note__card__header h5 {
+    color: white;
+    padding-top: 1rem;
+}
+
+.note__card__body p {
+    color: var(--color-welcome-title);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    font-weight: 200;
+}
+
+.btn__delete_note {
+    color: var(--bg-color-button);
+    font-size: 1.3rem;
+}
+
+.btn__delete_note:hover {
+    color: white;
+}
+
+.note__card__header .note__icon__option {
+    color: var(--bg-color-button);
+    font-size: 1.3rem;
+}
+
+.note__card__footer {
+    transition: .5s linear all;
+    border: none;
+    border-bottom: solid .5rem var(--bg-color-button);
+    font-size: .8rem;
+}
+
+.note__card:hover .note__card__footer {
+    border-bottom: solid .5rem white;
+}
+
+.profile__title {
+    font-size: 1.5rem;
+    padding: 1rem 0;
+}
+
+.profile__label {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--color-welcome-title);
+}
+
+.profile__fields {
+    background-color: var(--bg-color-body);
+    border: solid var(--bg-color-body);
+    padding: 1rem;
+    color: white !important;
+}
+
+.profile__fields:hover, .profile__fields:focus {
+    background-color: var(--bg-color-body);
+    border: solid var(--bg-color-button);
+}
+
+.ck-content {
+    background-color: var(--bg-color-body) !important;
+}
+
+.ck-toolbar__items {
+    background-color: var(--color-welcome-title);
+}
+
+
+
+@keyframes smooth_loading {
+    /* 0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    } */
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}

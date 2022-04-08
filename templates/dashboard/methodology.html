@@ -1,0 +1,129 @@
+{% extends 'dashboard/base.html' %}
+{% block body %}
+
+{% if messages %}
+    {% for message in messages %}
+    <script>
+        tata.success("Good Job !", "{{message}}");
+    </script>
+    {% endfor %}
+{% endif %}
+        <div class="content">
+            <div class="navigationBar">
+                <button id="sidebarToggle" class="btn sidebarToggle">
+                <i class="fa fa-arrow-left togglebtn"></i>
+            </div>
+            <div class="container-fluid home__dashboard">
+                <div class="container">
+                    <div class="card home__tables home__tables__without__title">
+                        <div class="card-header table__header__custom">
+                            <div class="container-fluid">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h5 class='methodology_intro'><i class="fas fa-clipboard-check"></i> my methodology</h5>
+                                    <span>
+                                        <form action="#" method="POST" class="form-group">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn custom_header_btn text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <i class='fas fa-arrow-right'></i>
+                                                Edit
+                                            </button>
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header modal__custom__header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                <i class='fa fa-plus-square p-1'></i>
+                                                                Edit Methodology
+                                                            </h5>
+                                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body modal__custom__body">
+                                                            <textarea name="methodology_content" cols="100" rows="20" id="editor" class="form-control modal__custom__input mt-3 mb-3" placeholder="Note Content..">
+                                                            {% if methodology %}
+                                                                {{methodology.methodology_content | safe}}
+                                                            {% endif %}
+                                                            </textarea>
+                                                        </div>
+                                                        <div class="modal-footer modal__custom__footer">
+                                                            <button type="button" class="btn custom__btn__close" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" name="submit" class="btn custom__btn">
+                                                                <i class='fa fa-plus-square'></i>
+                                                                Edit
+                                                            </button>
+                                                          </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </span>   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body card__body_custom text-white methodology_content">
+                            {% comment %} <div class="methodology__box">
+                                <h4 class='title__methodology'>Recon Widecard</h4>
+                                <div class="form-check methodology__check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label text-white" for="defaultCheck1">
+                                      Run Amass
+                                    </label>
+                                </div>
+                                <div class="form-check methodology__check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label text-white" for="defaultCheck1">
+                                      Run Subfinder
+                                    </label>
+                                </div>
+                                <div class="form-check methodology__check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label text-white" for="defaultCheck1">
+                                      Run Assetfinder
+                                    </label>
+                                </div>
+                                <div class="form-check methodology__check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label text-white" for="defaultCheck1">
+                                      Run Massdns
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="methodology__box">
+                                <h4 class="title__methodology">Information Gathering</h4>
+                                <div class="form-check methodology__check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label text-white" for="defaultCheck1">
+                                        Manually explore the site
+                                    </label>
+                                </div>
+                                <div class="form-check methodology__check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label text-white" for="defaultCheck1">
+                                        Spider/crawl for missed or hidden content
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="methodology__box">
+                                <h4 class="title__methodology">Configuration Management
+                                </h4>
+                                <div class="form-check methodology__check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label text-white" for="defaultCheck1">
+                                        Check for commonly used application and administrative URLs
+                                    </label>
+                                </div>
+                                <div class="form-check methodology__check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label text-white" for="defaultCheck1">
+                                        Check for old, backup and unreferenced files
+                                    </label>
+                                </div>
+                            </div> {% endcomment %}
+                            {% if methodology %}
+                                {{methodology.methodology_content | safe}}
+                            {% endif %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock body %}

@@ -1,0 +1,89 @@
+{% extends 'dashboard/base.html' %}
+
+{% block body %}
+        <div class="content">
+            <div class="navigationBar">
+                <button id="sidebarToggle" class="btn sidebarToggle">
+                    <i class="fa fa-arrow-left togglebtn"></i>
+            </div>
+            <div class="container-fluid home__dashboard">
+                {% comment %} <div class="container-fluid intro__home">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-muted text-center text-uppercase">
+                                {% if domain %}
+                                All Domains Of {{domain}}
+                                {% else %}
+                                No Program Selected Yet
+                                {% endif %}
+                            </h3>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+                <!-- Table Content Domains -->
+                <div class="container">
+                    <div class="card home__tables home__tables__without__title">
+                        <div class="card-header table__header__custom">
+                            <div class="container-fluid">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h5 class="methodology_intro">
+                                        <i class="fas fa-align-left"></i>
+                                        {% if domain %}
+                                        All Domains Of {{domain}}
+                                        {% else %}
+                                        No Program Selected Yet
+                                        {% endif %}
+                                    </h5>
+                                    <form action="#" method='POST' class="form-group">
+                                        {% csrf_token %}
+                                        <select class="form-select custom__target_select" aria-label="Default select example" onchange="this.form.submit();" name="old__program">
+                                            <option default>All Programs</option>
+                                            {% if programs %}
+                                                {% for program in programs %}
+                                                    <option value="{{program.id}}">
+                                                        {{program.ProgramName}}
+                                                    </option>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </select>  
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body card__body_custom">
+                            <table class="table text-center text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Domains</th>
+                                    <th>Matching Identities</th>
+                                </tr>
+                                {% if domains %}
+                                    {% for domain in domains %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>
+                                        <a href="https://{{domain}}" target='_blank'
+                                            class="btn btn-link text-decoration-none text-white">
+                                            {{domain}}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {% if org_name %}
+                                            {{org_name}}
+                                        {% else %}
+                                        <a href="#" class="btn custom__btn btn-sm">
+                                            {% comment %} <i class="far fa-trash-alt"></i> {% endcomment %}
+                                            Not Found
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock body %}

@@ -1,0 +1,89 @@
+{% extends 'dashboard/base.html' %}
+{% block body %}
+
+{% if success %}
+<script>
+    tata.success('Good Job !', "{{success}}");
+</script>
+{% endif %}
+
+<div class="content">
+    <div class="navigationBar">
+        <button id="sidebarToggle" class="btn sidebarToggle">
+        <i class="fa fa-arrow-left togglebtn"></i>
+    </div>
+    <div class="container-fluid home__dashboard">
+        <div class="container-fluid intro__home">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-muted text-center text-uppercase">All Github Dorks</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Table Content Subdomains -->
+        <div class="container">
+            <div class="card home__tables">
+                <div class="card-header table__header__custom">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <form action="" method='POST' class="form-group">
+                                {% csrf_token %}
+                                <input type="text" name="domain_name" placeholder='Your Target ..' class='form-control modal__custom__input'>
+                            </form>
+                            <span>
+                                <form action="" method='POST' class="form-group">
+                                    {% csrf_token %}
+                                    <button type="button" class="btn custom_header_btn text-white" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Dork</button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header modal__custom__header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Add Dork</h5>
+                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body modal__custom__body">
+                                                    <label for="dorkName" class='mb-3'>Dork Name :</label>
+                                                    <input type="text" class="form-control modal__custom__input" placeholder='Add Github Dork ..' name='dork_name'>
+                                                </div>
+                                                <div class="modal-footer modal__custom__footer">
+                                                    <button type="button" class="btn custom__btn__close" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" name="submit" class="btn custom__btn">Add Dork</button>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </span>   
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body card__body_custom">
+                    <table class="table text-center">
+                        <tr>
+                            <th>#</th>
+                            <th>Dork Name</th>
+                            <th>Dork Link</th>
+                        </tr>
+                        {% if domain %}
+                            {% if all_dorks %}
+                                {% for dork in all_dorks %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>
+                                {{dork.DorkName}}
+                            </td>
+                            <td>
+                                <a href="https://github.com/search?q={{domain}}%20{{dork.DorkName}}&type=Code" class="btn btn-link text-white" target="_blank">
+                                    {{dork.DorkName}}</a>
+                            </td>
+                        </tr>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

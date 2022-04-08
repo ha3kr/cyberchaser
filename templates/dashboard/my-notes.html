@@ -1,0 +1,126 @@
+{% extends 'dashboard/base.html' %}
+{% block body %}
+{% if message %}
+<script>
+    tata.success("Good Job !", "{{message}}");
+</script>
+{% endif %}
+
+        <div class="content">
+            <div class="navigationBar">
+                <button id="sidebarToggle" class="btn sidebarToggle">
+                <i class="fa fa-arrow-left togglebtn"></i>
+            </div>
+            <div class="container-fluid home__dashboard">
+                <div class="container">
+                    <div class="card home__tables home__tables__without__title">
+                        <div class="card-header table__header__custom">
+                            <div class="container-fluid">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h5 class='methodology_intro'><i class="fas fa-clipboard-check"></i> my Notes</h5>
+                                    <span>
+                                        <form action="#" method="post" class="form-group">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn custom_header_btn text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <i class='fa fa-plus-square p-1'></i>
+                                                Add Note
+                                            </button>
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header modal__custom__header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                <i class='fa fa-plus-square p-1'></i>
+                                                                Add Note
+                                                            </h5>
+                                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body modal__custom__body">
+                                                            <label for="noteName" class='mb-3'>Note Name :</label>
+                                                            <input type="text" class="form-control modal__custom__input" placeholder='Add Note Title ..' name="noteName">
+                                                            <label for="noteContent" class='mt-3'>Note Content :</label>
+                                                            <textarea name="noteContent" cols="30" rows="10" class="form-control modal__custom__input mt-3 mb-3" placeholder="Note Content.."></textarea>
+                                                        </div>
+                                                        <div class="modal-footer modal__custom__footer">
+                                                            <button type="button" class="btn custom__btn__close" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" name="submit" class="btn custom__btn">
+                                                                <i class='fa fa-plus-square'></i>
+                                                                Add Note
+                                                            </button>
+                                                          </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </span>   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body card__body_custom">
+                            <div class="row d-flex justify-content-start">
+                            {% if all_notes %}
+                                {% for note in all_notes %}
+                                <a class="card col-md-4 note__card text-decoration-none text-white"  href="?note_id={{note.id}}" id="note" class="custom_header_btn text-white">
+                                    <div class="card-header note__card__header d-flex align-items-center justify-content-center">
+                                        <h5>{{note.note_name}}</h5>
+                                    </div>
+                                    <div class="card-body note__card__body">
+
+                                        <p>{{note.note_content}}</p>
+                                    </div>
+                                    <div class="card-footer note__card__footer d-flex align-items-center justify-content-between">
+                                        <span>
+                                            <i class="fa fa-clone"></i>
+                                            Only You
+                                        </span>
+                                        <span>
+                                            <i class="far fa-calendar-alt"></i>
+                                            {{note.note_date}}
+                                        </span>
+                                    </div>
+                                </a>
+                                    {% endfor %}
+
+                                {% else %}
+                                    <h4 class="text-muted text-center p-4">
+                                        <i class="fa fa-arrow-circle-right"></i> No Note Saved Yet.
+                                    </h4>
+                                {% endif %}
+                                {% if note %}
+                                <div class="modal fade" id="NoteModal" tabindex="-1" aria-labelledby="NoteModal" aria-hidden="false">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header modal__custom__header">
+                                                <h5 class="modal-title" id="ModalNote">
+                                                    {{note.note_name}}
+                                                </h5>
+                                                <a href="?delete_note={{note.id}}" class="btn btn__delete_note">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </a>
+                                            </div>
+                                            <div class="modal-body modal__custom__body">
+                                                <p>
+                                                    {{note.note_content}}
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer modal__custom__footer d-flex align-items-center justify-content-between">
+                                                <span class="text-white">
+                                                    <i class="fa fa-clone"></i>
+                                                    Only You
+                                                </span>
+                                                <span class="text-white">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                    {{note.note_date}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock body %}
