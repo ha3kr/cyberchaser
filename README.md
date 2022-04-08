@@ -7,7 +7,9 @@ cyberchaser is a recon framework designed to help and manage bug bounty process.
 
 # IMPORTANT :
 in order to use cyberchaser you have to install the following :
-1. requests 
+1. django
+  `pip3 install django`
+2. requests 
   `pip install requests`
 3. python-whois 
   `git clone https://github.com/DannyCork/python-whois.git && cd python-whois && python3 setup.py install`
